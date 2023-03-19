@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from posts.models import Comment, Follow, Group, Post, User
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
+from rest_framework.validators import UniqueTogetherValidator
 
 
 class Base64ImageField(serializers.ImageField):
@@ -67,6 +68,12 @@ class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
         fields = ('user', 'following')
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Follow.objects.all(),
+                fields=['user', 'following']
+            )
+        ]
 
     def validate_following(self, value):
         following = value
@@ -78,6 +85,7 @@ class FollowSerializer(serializers.ModelSerializer):
         return following
 
     # def validate(self, data):
+    #
     #     if self.context['request'].user == data['following']:
     #         raise serializers.ValidationError(
     #             'Нельзя подписаться на самого себя!')
