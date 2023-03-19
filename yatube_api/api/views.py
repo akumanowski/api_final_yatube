@@ -1,6 +1,6 @@
 """Проект спринта 9: модуль контроллер приложения Api."""
 from django.shortcuts import get_object_or_404
-from posts.models import Follow, Group, Post
+from posts.models import Group, Post
 from rest_framework import filters, permissions
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
@@ -20,7 +20,6 @@ class GroupViewSet(ReadOnlyModelViewSet):
 class PostViewSet(ModelViewSet):
     """Классы-вьюсет для Post."""
     queryset = Post.objects.all()
-    # queryset = Post.objects.select_related("author")
     serializer_class = PostSerializer
     permission_classes = (AuthorPermission,
                           permissions.IsAuthenticatedOrReadOnly)
