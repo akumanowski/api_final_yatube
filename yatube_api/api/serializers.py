@@ -1,11 +1,11 @@
 """Проект спринта 9: модуль сериалайзер приложения Api."""
 import base64
+
+from django.core.files.base import ContentFile
+from django.shortcuts import get_object_or_404
+from posts.models import Comment, Follow, Group, Post, User
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
-from django.shortcuts import get_object_or_404
-from django.core.files.base import ContentFile
-
-from posts.models import Comment, Group, Post, Follow, User
 
 
 class Base64ImageField(serializers.ImageField):

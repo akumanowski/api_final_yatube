@@ -1,10 +1,10 @@
 """Проект спринта 8: модуль управления шаблонами адресов приложения Api."""
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView, TokenVerifyView)
-from django.urls import include, path
 
-from .views import PostViewSet, GroupViewSet, CommentViewSet, FollowViewSet
+from .views import CommentViewSet, FollowViewSet, GroupViewSet, PostViewSet
 
 router = DefaultRouter()
 router.register(r'posts', PostViewSet, basename='posts')
