@@ -4,7 +4,7 @@
 Это учебный проект, в котором отрабатываются навыки разработки API для собственного проекта с архитектурой 
 [REST, REpresentational State Transfer](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). 
 REST API мы создаем для Django-проекта используя библиотеку Django REST Framework, 
-которая ускоряет и упрощает разработку REST API.
+которая ускоряет и упрощает разработку.
 
 [Django REST Framework (DRF)](https://www.django-rest-framework.org/) предоставляет разработчику весь необходимый 
 набор инструментов для создания REST-сервисов на основе Django. 
