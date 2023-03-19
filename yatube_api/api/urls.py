@@ -1,4 +1,4 @@
-"""Проект спринта 8: модуль управления шаблонами адресов приложения Api."""
+"""Проект спринта 9: модуль управления шаблонами адресов приложения Api."""
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,

@@ -2,7 +2,6 @@
 import base64
 
 from django.core.files.base import ContentFile
-from django.shortcuts import get_object_or_404
 from posts.models import Comment, Follow, Group, Post, User
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
@@ -59,11 +58,9 @@ class FollowSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
-        # read_only=True,
         slug_field='username',
         queryset=User.objects.all()
     )
-    # following = serializers.CharField(source='following.username')
 
     class Meta:
         model = Follow
@@ -77,29 +74,8 @@ class FollowSerializer(serializers.ModelSerializer):
 
     def validate_following(self, value):
         following = value
-        # get_object_or_404(User, username=value)
         if following == self.context['request'].user:
             raise serializers.ValidationError(
                 'Нельзя подписаться на самого себя!'
             )
         return following
-
-    # def validate(self, data):
-    #
-    #     if self.context['request'].user == data['following']:
-    #         raise serializers.ValidationError(
-    #             'Нельзя подписаться на самого себя!')
-    #     return data
-
-    # def create(self, validated_data):
-    #     user = self.context['request'].user
-    #     following = get_object_or_404(User,
-    #                                   username=validated_data.get(
-    #                                       'following'
-    #                                   )
-    #                                   )
-    #     follow = Follow.objects.create(user=user, following=following)
-    #     return follow
-
-    # def create(self, validated_data):
-    #     return Follow.objects.create(**validated_data)

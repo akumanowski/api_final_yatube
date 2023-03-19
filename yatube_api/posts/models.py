@@ -1,3 +1,4 @@
+"""Проект спринта 9: модуль управления моделями приложения Post."""
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -21,6 +22,7 @@ class Group(models.Model):
 
 
 class Post(models.Model):
+    """Класс управления данными постов."""
     text = models.TextField()
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
@@ -38,7 +40,6 @@ class Post(models.Model):
     )
 
     class Meta:
-        # ordering = ('-pub_date',)
         default_related_name = 'posts'
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
@@ -48,6 +49,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    """Класс управления данными комментариев к постам."""
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='comments')
     post = models.ForeignKey(
@@ -68,7 +70,6 @@ class Comment(models.Model):
 
 class Follow(models.Model):
     """Класс управления подписками."""
-
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -86,13 +87,8 @@ class Follow(models.Model):
     )
 
     class Meta:
-        # ordering = ('-user',)
         constraints = [models.UniqueConstraint(fields=('user', 'following'),
                                                name='unique_subscribe')]
-        # models.CheckConstraint(
-        #     check=~models.Q(user=models.F('following')),
-        #     name='user_not_following'
-        # )
         default_related_name = 'follows'
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'

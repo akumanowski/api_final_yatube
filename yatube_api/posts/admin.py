@@ -1,3 +1,5 @@
+"""Проект спринта 9: модуль управления панелью администратора
+   приложения Post."""
 from django.contrib import admin
 
 from .models import Comment, Follow, Group, Post
