@@ -1,67 +1,33 @@
 ## YATUBE_API
-### Описание:
+### Описание
+Проект Yatube — это платформа для публикаций, блог. У пользователей есть возможность 
+публиковать записи, комментировать свои публикации и публикации других пользователей, 
+подписываться на публикации других пользователей. 
 
-Это учебный проект, в котором отрабатываются навыки разработки API для собственного проекта с архитектурой 
+### Используемые технологии
+```
+Python 3.9
+Django 3.2.16
+pytest 6.2.4
+pytest-pythonpath 0.7.3
+pytest-django 4.4.0
+djangorestframework 3.12.4
+djangorestframework-simplejwt 4.7.2
+Pillow 9.3.0
+PyJWT 2.1.0
+requests 2.26.0
+```
+Это учебный проект, в котором отрабатываются навыки разработки API для собственного проекта 
+с архитектурой 
 [REST, REpresentational State Transfer](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). 
 REST API мы создаем для Django-проекта используя библиотеку Django REST Framework, 
 которая ускоряет и упрощает разработку.
 
-[Django REST Framework (DRF)](https://www.django-rest-framework.org/) предоставляет разработчику весь необходимый 
-набор инструментов для создания REST-сервисов на основе Django. 
-DRF — это коллекция предустановленных классов, которые предоставляют разработчику инструменты для 
-решения штатных задач, возникающих при создании REST API. 
-
-На основе DRF можно минимальным количеством кода преобразовать любое Django-приложение в REST API.
-
-### Как запустить проект:
-
-Клонировать репозиторий и перейти в него в командной строке:
-
-```
-git clone https://github.com/akumanowski/api_final_yatube.git
-```
-
-```
-cd yatube_api
-```
-
-Создать виртуальное окружение:
-
-```
-python3 -m venv env
-```
-
-Активировать виртуальное окружение:
-- для Windows
-```
-env/bin/activate
-```
-- для Linux
-```
-source env/bin/activate
-```
-
-Установить зависимости из файла requirements.txt:
-
-```
-python3 -m pip install --upgrade pip
-```
-
-```
-pip install -r requirements.txt
-```
-
-Выполнить миграции:
-
-```
-python3 manage.py migrate
-```
-
-Запустить проект:
-
-```
-python3 manage.py runserver
-```
+[Django REST Framework (DRF)](https://www.django-rest-framework.org/) предоставляет 
+разработчику весь необходимый набор инструментов для создания REST-сервисов на основе Django. 
+DRF — это коллекция предустановленных классов, которые предоставляют разработчику инструменты
+для решения штатных задач, возникающих при создании REST API. На основе DRF можно минимальным 
+количеством кода преобразовать любое Django-приложение в REST API.
 ### Примеры запросов к API
 #### 1. Получение публикаций
 ```
@@ -134,6 +100,59 @@ GET http://127.0.0.1:8000/api/v1/follow/
         "following": "user3"
     }
 ]
+```
+### Как запустить проект:
+
+Клонировать репозиторий на локальный компьютер и перейти в папку api_final_yatube:
+
+```
+git clone https://github.com/akumanowski/api_final_yatube.git
+```
+
+```
+cd api_final_yatube
+```
+
+Создать виртуальное окружение:
+
+```
+python3 -m venv env
+```
+
+Активировать виртуальное окружение:
+- для Windows
+```
+env/bin/activate
+```
+- для Linux
+```
+source env/bin/activate
+```
+
+Установить зависимости из файла requirements.txt:
+
+```
+python3 -m pip install --upgrade pip
+```
+
+```
+pip install -r requirements.txt
+```
+Перейти в папку проекта yatube_api:
+
+```
+cd yatube_api
+```
+Выполнить миграции:
+
+```
+python3 manage.py migrate
+```
+
+Запустить проект:
+
+```
+python3 manage.py runserver
 ```
 ### Документация к API
 Документация разработана с применением стандарта [OpenAPI](https://www.openapis.org/). Этот стандарт 
