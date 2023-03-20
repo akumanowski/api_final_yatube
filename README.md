@@ -25,12 +25,18 @@ git clone https://github.com/akumanowski/api_final_yatube.git
 cd yatube_api
 ```
 
-Cоздать и активировать виртуальное окружение:
+Создать виртуальное окружение:
 
 ```
-python -m venv env
+python3 -m venv env
 ```
 
+Активировать виртуальное окружение:
+- для Windows
+```
+env/bin/activate
+```
+- для Linux
 ```
 source env/bin/activate
 ```
@@ -38,7 +44,7 @@ source env/bin/activate
 Установить зависимости из файла requirements.txt:
 
 ```
-python -m pip install --upgrade pip
+python3 -m pip install --upgrade pip
 ```
 
 ```
@@ -48,13 +54,86 @@ pip install -r requirements.txt
 Выполнить миграции:
 
 ```
-python manage.py migrate
+python3 manage.py migrate
 ```
 
 Запустить проект:
 
 ```
-python manage.py runserver
+python3 manage.py runserver
+```
+### Примеры запросов к API
+#### 1. Получение публикаций
+```
+# Запрос на получение списка публикация:
+GET http://127.0.0.1:8000/api/v1/posts/
+# Ответ API в формате JSON:
+[
+    {
+        "id": 1,
+        "author": "user1",
+        "image": null,
+        "text": "Это первый пост в нашем сообществе! Прошу любить и жаловать )",
+        "pub_date": "2023-03-19T07:59:38.661010Z",
+        "group": null
+    },
+    {
+        "id": 2,
+        "author": "user2",
+        "image": null,
+        "text": "Заскучал что-то. Посоветуйте, что можно почитать вдохновляющее?",
+        "pub_date": "2023-03-19T08:14:18.596656Z",
+        "group": 1
+    }
+]
+```
+#### 2. Создание публикации
+```
+# Запрос на создание публикации:
+POST http://127.0.0.1:8000/api/v1/posts/
+# Тело запроса в формате JSON:
+{
+    "text": "Лев Толстой - великий русский писатель!",
+    "group": 1
+}
+# Ответ API в формате JSON:
+{
+    "id": 4,
+    "author": "user1",
+    "image": null,
+    "text": "Лев Толстой - великий русский писатель!",
+    "pub_date": "2023-03-20T11:33:28.259621Z",
+    "group": 1
+}
+```
+#### 3. Добавление комментария к публикации
+```
+# Запрос на добавление комментария к публикации:
+POST http://127.0.0.1:8000/api/v1/posts/1/comments/
+# Тело запроса в формате JSON:
+{
+    "text": "Действительно, это замечательно!"
+}
+# Ответ API в формате JSON:
+{
+    "id": 1,
+    "author": "user1",
+    "post": 1,
+    "text": "Действительно, это замечательно!",
+    "created": "2023-03-20T11:40:38.784326Z"
+}
+```
+#### 4. Получение всех подписок пользователя, сделавшего запрос
+```
+# Запрос на получение всех подписок пользователя:
+GET http://127.0.0.1:8000/api/v1/follow/
+# Ответ API в формате JSON:
+[
+    {
+        "user": "user1",
+        "following": "user3"
+    }
+]
 ```
 ### Документация к API
 Документация разработана с применением стандарта [OpenAPI](https://www.openapis.org/). Этот стандарт 
